@@ -1,0 +1,15 @@
+﻿@model IEnumerable<WebApplication1.Models.Music>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink("Add Music", "Add", "Musics", null, new { @class = "btn btn-primary" })
+</p>
+
+<p>@Model.Single(m=>m.Id==1).YoutubeUrl</p>
+<p>Hello</p>
