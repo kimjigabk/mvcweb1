@@ -7,22 +7,26 @@ using System.Net.Http;
 using System.Web.Http;
 using WebApplication1.Dtos;
 using WebApplication1.Models;
+using WebApplication1.Repository;
 
 namespace WebApplication1.Controllers.api
 {
     public class MusicsController : ApiController
     {
         private ApplicationDbContext _context;
+        IMusicRepository _musicRepository;
 
         public MusicsController()
         {
+            
             _context = new ApplicationDbContext();
         }
 
         //GET /api/musics
         public IHttpActionResult GetMusics()
         {
-            var musicDtos = _context.Musics.ToList().Select(Mapper.Map<Music, MusicDto>);
+            IEnumerable<Music> musics = _musicRepository.GetMusics();
+            var musicDtos = musics.Select(Mapper.Map<Music, MusicDto>);
 
             return Ok(musicDtos);
         }
@@ -30,7 +34,7 @@ namespace WebApplication1.Controllers.api
         //Get /api/musics/1
         public IHttpActionResult GetMusic(int id)
         {
-            var music = _context.Musics.SingleOrDefault(m => m.Id == id);
+            var music = _musicRepository.GetMusicById(id);
             if (music == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
@@ -45,9 +49,8 @@ namespace WebApplication1.Controllers.api
                 return BadRequest();
 
             var music = Mapper.Map<MusicDto, Music>(musicDto);
-            _context.Musics.Add(music);
-            _context.SaveChanges();
-
+            _musicRepository.InsertMusic(music);
+   
             musicDto.Id = music.Id;
             return Created(new Uri(Request.RequestUri + "/" + music.Id), musicDto);
         }
@@ -59,14 +62,9 @@ namespace WebApplication1.Controllers.api
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var musicInDb = _context.Musics.SingleOrDefault(c => c.Id == id);
-
-            if (musicInDb == null)
+            bool flag = _musicRepository.UpdateMusic(id, musicDto);
+            if (!flag)
                 return NotFound();
-
-            Mapper.Map(musicDto, musicInDb);
-
-            _context.SaveChanges();
 
             return Ok();
         }
@@ -76,12 +74,9 @@ namespace WebApplication1.Controllers.api
         public IHttpActionResult DeleteMusic(int id)
         {
             var musicInDb = _context.Musics.SingleOrDefault(c => c.Id == id);
-
-            if (musicInDb == null)
+            bool flag = _musicRepository.DeleteMusic(id);
+            if (!flag)
                 return NotFound();
-
-            _context.Musics.Remove(musicInDb);
-            _context.SaveChanges();
 
             return Ok();
         }
