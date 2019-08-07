@@ -21,6 +21,8 @@ namespace WebApplication1.Repository
             if (music == null)
                 return false;
             _context.Musics.Remove(music);
+            _context.SaveChanges();
+
             return true;
         }
 

@@ -7,3 +7,62 @@
 
 <h2>Add</h2>
 
+<form id="addMusic"  method="post">
+    <div class="form-group">
+        <label>Title</label>
+        <div class="tt-container">
+            <input id="title" name="title" required type="text" value="" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Artist</label>
+        <div class="tt-container">
+            <input id="artist" name="artist" required type="text" value="" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Description</label>
+        <div class="tt-container">
+            <input id="description" name="description" required type="text" value="" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Youtube URL</label>
+        <div class="tt-container">
+            <input id="youtubeUrl" name="youtubeUrl" required type="text" value="" class="form-control" />
+        </div>
+    </div>
+
+
+    <input type="submit" class="btn btn-primary submit" value="Submit" />
+    <div id="para"></div>
+</form>
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+$("#addMusic").on("submit", function (event) {
+    var $this = $(this);
+    var formValues = $this.serializeArray();
+    console.log(frmValues);
+    $.ajax({
+        type: 'POST',
+        url: '/api/musics',
+        data: formValues
+    })
+    .done(function () {
+        $("#para").text("Serialized! Input String is " + frmValues);
+    })
+    .fail(function () {
+        $("#para").text("An error occured");
+    });
+    event.preventDefault(); 
+});
+    </script>
+
+}
