@@ -24,10 +24,16 @@ namespace WebApplication1.Controllers
         // GET: Musics
         public ActionResult Index()
         {
-            var musics = _context.Musics.ToList();
-            return View("List", musics);
+     
+            return RedirectToAction("List");
+      
         }
 
+        public ActionResult List()
+        {
+            var musics = _context.Musics.ToList();
+            return View(musics);
+        }
         public ActionResult Add()
         {
             return View();

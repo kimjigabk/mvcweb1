@@ -18,8 +18,8 @@ namespace WebApplication1.Controllers.api
 
         public MusicsController()
         {
-            
             _context = new ApplicationDbContext();
+            _musicRepository = new MusicRepository(_context);
         }
 
         //GET /api/musics

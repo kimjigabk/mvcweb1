@@ -9,7 +9,9 @@ namespace WebApplication1
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/scripts/datatables/jquery.datatables.js",
+                        "~/scripts/datatables/datatables.bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -24,7 +26,8 @@ namespace WebApplication1
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/content/datatalbes/css/datatables.bootstrap.css"));
         }
     }
 }
