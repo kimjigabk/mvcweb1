@@ -43,6 +43,7 @@ namespace WebApplication1.Controllers.api
 
         //POST /api/musics
         [HttpPost]
+        [Authorize(Roles = RoleName.CanManageMusics)]
         public IHttpActionResult CreateMusic(MusicDto musicDto)
         {
             if (!ModelState.IsValid)
@@ -55,8 +56,9 @@ namespace WebApplication1.Controllers.api
             return Created(new Uri(Request.RequestUri + "/" + music.Id), musicDto);
         }
 
-        // PUT /api/customers/musics/1
+        // PUT /api/musics/1
         [HttpPut]
+        [Authorize(Roles = RoleName.CanManageMusics)]
         public IHttpActionResult UpdateMusic(int id, MusicDto musicDto)
         {
             if (!ModelState.IsValid)
@@ -69,8 +71,9 @@ namespace WebApplication1.Controllers.api
             return Ok();
         }
 
-        // DELETE /api/customers/1
+        // DELETE /api/musics/1
         [HttpDelete]
+        [Authorize(Roles = RoleName.CanManageMusics)]
         public IHttpActionResult DeleteMusic(int id)
         {
             var musicInDb = _context.Musics.SingleOrDefault(c => c.Id == id);

@@ -113,3 +113,4 @@ C:\Users\kimji\source\repos\WebApplication1\obj\Debug\WebApplication1.csproj.Cor
 C:\Users\kimji\source\repos\WebApplication1\obj\Debug\WebApplication1.csproj.CopyComplete
 C:\Users\kimji\source\repos\WebApplication1\obj\Debug\WebApplication1.dll
 C:\Users\kimji\source\repos\WebApplication1\obj\Debug\WebApplication1.pdb
+C:\Users\kimji\source\repos\WebApplication1\obj\Debug\WebApplication1.Migrations.SeedUsers.resources

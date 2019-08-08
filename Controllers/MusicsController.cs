@@ -24,7 +24,7 @@ namespace WebApplication1.Controllers
         // GET: Musics
         public ActionResult Index()
         {
-     
+            
             return RedirectToAction("List");
       
         }
@@ -32,11 +32,15 @@ namespace WebApplication1.Controllers
         public ActionResult List()
         {
             var musics = _context.Musics.ToList();
+            if (!User.IsInRole("CanManageMusics"))
+                return View("ReadOnlyList");
             return View(musics);
         }
         public ActionResult Add()
         {
             return View();
         }
+
+        public ActionResult Detail
     }
 }
