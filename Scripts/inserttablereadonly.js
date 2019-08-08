@@ -8,13 +8,13 @@
             {
                 data: "title",
                 render: function (data,type,music) {
-                    return "<a href='/musics/" + music.id + "'>" + music.title + "</a>";
+                    return "<a href='/musics/detail/" + music.id + "'>" + music.title + "</a>";
                 }
             },
             {
                 data: "artist",
                 render: function (data, type, music) {
-                    return "<a href='/musics/" + music.id + "'>" + music.artist + "</a>";
+                    return "<a href='/musics/detail/" + music.id + "'>" + music.artist + "</a>";
                 }
 
             },

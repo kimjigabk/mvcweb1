@@ -41,6 +41,13 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public ActionResult Detail
+        public ActionResult Detail(int id=1)
+        {
+            var music = _context.Musics.SingleOrDefault(m => m.Id == id);
+
+            if (music == null)
+                return HttpNotFound();
+            return View(music);
+        }
     }
 }

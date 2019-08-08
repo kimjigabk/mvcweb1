@@ -449,6 +449,7 @@
     <Content Include="Views\Musics\List.cshtml" />
     <Content Include="Views\Musics\Add.cshtml" />
     <Content Include="Views\Musics\ReadOnlyList.cshtml" />
+    <Content Include="Views\Musics\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
